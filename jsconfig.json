@@ -1,0 +1,11 @@
+{
+  "compilerOptions": {
+    "baseUrl": "src",
+    "paths": {
+      "Core/*": ["./app/bundles/core/*"]
+    }
+  },
+  "exclude": [
+    "node_modules"
+  ]
+}
