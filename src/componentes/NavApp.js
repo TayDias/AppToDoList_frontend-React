@@ -52,7 +52,7 @@ function NavApp () {
         )
 }
 
-{/* Css */}
+/* Css */
 const useStyles = makeStyles(theme => ({
     icon: {
         marginRight: theme.spacing(2),
@@ -74,7 +74,7 @@ const useStyles = makeStyles(theme => ({
     }
   }))
 
-  {/* Const */}
+  /* Const */
   const ButtonSair = styled.button`
   border: 0
   background: transparent
