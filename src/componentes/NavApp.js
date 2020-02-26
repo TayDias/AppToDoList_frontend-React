@@ -7,27 +7,27 @@ import NotesRoundedIcon from '@material-ui/icons/NotesRounded'
 import AccountCircle from '@material-ui/icons/AccountCircle'
 import IconButton from '@material-ui/core/IconButton'
 
-//import useReactRouter from 'use-react-router'
+import { useHistory } from "react-router-dom"
 import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import styled from 'styled-components'
 
 function NavApp () {
     const classes = useStyles()
-    //const { history } = useReactRouter()
+    const history = useHistory()
     const [anchorElement, setAnchorElement] = useState(null)
     const handleOpenMenu = (e) => setAnchorElement(e.target)
     const handleCloseMenu = () => setAnchorElement(null)
 
     const handleClick = () => {
-      //history.push('/')
+      history.push('/')
     }
 
     return (
         <div className={classes.root}>
             <AppBar position="relative">
                 <Toolbar>
-                    <IconButton className={classes.icon} color='inherit'>
+                    <IconButton className={classes.icon} color='inherit' onClick={() => history.push('/')}>
                         <NotesRoundedIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" color="inherit" align="center" noWrap>

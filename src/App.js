@@ -1,13 +1,11 @@
 import React from 'react'
 import './App.css'
-import NavApp from 'componentes/NavApp'
-import PainelListas from 'pages/PainelListas'
+import Routes from 'route/routes'
 
 function App() {
   return (
     <div className="App">
-      <NavApp />
-      <PainelListas />
+      <Routes />
     </div>
   );
 }

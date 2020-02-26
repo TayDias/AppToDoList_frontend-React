@@ -1,14 +1,17 @@
 import React, { useEffect } from 'react'
-import { Card, CardActions, CardContent, CardMedia } from '@material-ui/core'
 import { Container, Grid, Button, Typography }  from '@material-ui/core'
+import { Card, CardActions, CardContent, CardMedia } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
-import  caderno3 from '../images/caderno3.jpg'
+import { useHistory } from "react-router-dom"
 
+import NavApp from 'componentes/NavApp'
+import  caderno3 from '../images/caderno3.jpg'
 import api from 'services/api'
 
 function PainelListas () {
     const classes = useStyles();
     const [data, setData] = React.useState([])
+    const history = useHistory()
     const idUsuario = 3
 
     useEffect(() => {
@@ -25,6 +28,7 @@ function PainelListas () {
 
     return (
         <div className={classes.heroContent}>
+            <NavApp />
             <Container className={classes.cardGrid} maxWidth="md">          
                 <Grid container spacing={4}>
                     {data.map(card => (
@@ -39,13 +43,17 @@ function PainelListas () {
                                 <Typography gutterBottom variant="h5" component="h2">
                                     {card.nome}
                                 </Typography>
-                                {card.publica == true? 
+                                {card.publica === true ? 
                                     <Typography variant="h7">Compartilhada</Typography>: 
                                     <Typography variant="h7">Particular</Typography> 
                                 }                                
                             </CardContent>
-                            <CardActions>
-                                <Button size="small" color="primary">
+                            <CardActions>                            
+                                <Button size="small" color="primary"
+                                    onClick={() => history.push({
+                                        pathname: '/lista',
+                                        state: { idL: (card.id), nome: (card.nome) }
+                                      })}>
                                     Abrir
                                 </Button>
                             </CardActions>
