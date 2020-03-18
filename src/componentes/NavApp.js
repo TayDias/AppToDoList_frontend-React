@@ -27,13 +27,13 @@ function NavApp () {
         <div className={classes.root}>
             <AppBar position="relative">
                 <Toolbar>
-                    <IconButton className={classes.icon} color='inherit' onClick={() => history.push('/')}>
+                    <IconButton className={classes.icon} onClick={() => history.push('/')}>
                         <NotesRoundedIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" color="inherit" align="center" noWrap>
                         React App
                     </Typography>
-                    <IconButton className={classes.iconAcc} color='inherit' onClick={handleOpenMenu}>
+                    <IconButton className={classes.iconAcc} onClick={handleOpenMenu}>
                         <AccountCircle />
                     </IconButton>
                     <Menu
@@ -56,15 +56,16 @@ function NavApp () {
 const useStyles = makeStyles(theme => ({
     icon: {
         marginRight: theme.spacing(2),
+        color: "inherit"
     },
     iconAcc: {
         marginRight: theme.spacing(2),
         marginLeft: "93%",
-        position: "Absolute"
+        position: "Absolute",
+        color: "inherit"
       },
     title: {
-        marginLeft: "42%",
-        marginRight: "42%",
+        marginLeft: "45%",
         position: "Absolute"
     },
     root: {

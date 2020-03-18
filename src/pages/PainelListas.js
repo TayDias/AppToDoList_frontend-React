@@ -52,7 +52,7 @@ function PainelListas () {
                                 <Button size="small" color="primary"
                                     onClick={() => history.push({
                                         pathname: '/lista',
-                                        state: { idL: (card.id), nome: (card.nome) }
+                                        state: { idL: (card.id), nome: (card.nome), publica: (card.publica) }
                                       })}>
                                     Abrir
                                 </Button>

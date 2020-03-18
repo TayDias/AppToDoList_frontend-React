@@ -1,18 +1,25 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useState, setState } from 'react'
 import MaterialTable from 'material-table'
 import NavApp from 'componentes/NavApp'
+import GroupBar from 'componentes/GroupBar'
 
 import api from 'services/api'
 
 function Lista (props){
-    let { idL, nome } = props.location.state
+    let { idL, nome, publica } = props.location.state
     const [data, setData] = React.useState([])
-    const [columns] = useState([
-        { title: 'ID', field: 'id' },
+    let [columns] = useState([
         { title: 'Nome', field: 'nome' },
         { title: 'Detalhes', field: 'detalhes' },
-        { title: 'Status', field: 'status' }
-    ])   
+        { title: 'Status', field: 'status' }       
+    ])
+    let [columnsPublica] = useState([
+        { title: 'Responsável', field: 'nomeP' }
+    ])
+
+    if(publica){       
+        columns = columns.concat(columnsPublica)
+    }
 
     useEffect(() => {
         async function retornaTarefas () {
@@ -30,6 +37,8 @@ function Lista (props){
         <>         
             <div style={{ maxWidth: '100%' }}>
                 <NavApp />
+                {publica === true ? <GroupBar idL={idL}/> : null}
+
                 <MaterialTable
                     title={nome}
                     columns={columns}
@@ -38,7 +47,8 @@ function Lista (props){
                         {
                             icon: 'lock1',
                             tooltip: 'Assumir',
-                            onClick: (event, rowData) => alert(rowData.nome + " assumida ")
+                            onClick: (event, rowData) => alert(rowData.nome + " assumida "),
+                            hidden: !publica
                         },
                         {
                             icon: 'checkcircle',
