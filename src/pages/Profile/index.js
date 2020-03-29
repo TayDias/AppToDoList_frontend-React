@@ -4,31 +4,46 @@ import { Card, CardActions, CardContent, CardMedia } from '@material-ui/core'
 import { makeStyles } from '@material-ui/core/styles'
 import { useHistory } from "react-router-dom"
 
-import NavApp from 'componentes/NavApp'
-import  caderno3 from '../images/caderno3.jpg'
+import MainNavbar from '../Navbar/Main'
+import caderno3 from '../../images/caderno3.jpg'
+
 import api from 'services/api'
 
-function PainelListas () {
-    const classes = useStyles();
-    const [data, setData] = React.useState([])
+import UserDetails from '../../utils/userDetails'
+
+function Profile () {
+    const classes = useStyles()
     const history = useHistory()
-    const idUsuario = 3
+    
+    const userName = localStorage.getItem('username')
+    const usuario = UserDetails(userName)
+
+    localStorage.setItem('name', usuario.nome)
+
+    // Array [ valor, funçãoDeAtualização]
+    const [data, setData] = React.useState([])
 
     useEffect(() => {
         async function retornaListas () {
             try {
-                const result = await api.get('/lista', { params: { idUser: idUsuario } }, api.config)
+                const result = await api.get('/lista', { 
+                    params: { 
+                        idUser: usuario.id 
+                    } 
+                }, api.config)
+
                 setData(result.data)
-            } catch (e) {
-                console.log(e)
+            } catch (err) {
+                console.log(err)
             }
         }
         retornaListas()
-    }, [])
+    
+    }, [usuario])
 
     return (
         <div className={classes.heroContent}>
-            <NavApp />
+            <MainNavbar />
             <Container className={classes.cardGrid} maxWidth="md">          
                 <Grid container spacing={4}>
                     {data.map(card => (
@@ -43,10 +58,10 @@ function PainelListas () {
                                 <Typography gutterBottom variant="h5" component="h2">
                                     {card.nome}
                                 </Typography>
-                                {card.publica === true ? 
+                                {/*card.publica === true ? 
                                     <Typography variant="h7">Compartilhada</Typography>: 
                                     <Typography variant="h7">Particular</Typography> 
-                                }                                
+                                */}                                
                             </CardContent>
                             <CardActions>                            
                                 <Button size="small" color="primary"
@@ -91,4 +106,4 @@ const useStyles = makeStyles(theme => ({
     }
   }));
 
-export default PainelListas
+export default Profile

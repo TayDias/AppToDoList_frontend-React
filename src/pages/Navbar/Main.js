@@ -12,9 +12,12 @@ import Menu from '@material-ui/core/Menu'
 import MenuItem from '@material-ui/core/MenuItem'
 import styled from 'styled-components'
 
-function NavApp () {
+function MainNavbar () {
     const classes = useStyles()
     const history = useHistory()
+
+    const userName = localStorage.getItem('name')
+
     const [anchorElement, setAnchorElement] = useState(null)
     const handleOpenMenu = (e) => setAnchorElement(e.target)
     const handleCloseMenu = () => setAnchorElement(null)
@@ -27,11 +30,11 @@ function NavApp () {
         <div className={classes.root}>
             <AppBar position="relative">
                 <Toolbar>
-                    <IconButton className={classes.icon} onClick={() => history.push('/')}>
+                    <IconButton className={classes.icon} onClick={() => history.push('/profile')}>
                         <NotesRoundedIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" color="inherit" align="center" noWrap>
-                        React App
+                        To Do Lists
                     </Typography>
                     <IconButton className={classes.iconAcc} onClick={handleOpenMenu}>
                         <AccountCircle />
@@ -41,7 +44,10 @@ function NavApp () {
                         onClose={handleCloseMenu}
                         anchorEl={anchorElement}>
                         <MenuItem>
-                            <ButtonSair onClick={handleClick}>
+                            <h5 className="userText">Bem vindo {userName}</h5>
+                        </MenuItem>
+                        <MenuItem>
+                            <ButtonSair className="button" onClick={handleClick}>
                                 Sair
                             </ButtonSair>
                         </MenuItem>
@@ -72,6 +78,12 @@ const useStyles = makeStyles(theme => ({
         flexGrow: 1,
         width: '100%',
         backgroundColor: theme.palette.background.paper
+    },
+    button: {
+
+    },
+    userText: {
+
     }
   }))
 
@@ -81,4 +93,4 @@ const useStyles = makeStyles(theme => ({
   background: transparent
 `
 
-export default NavApp
+export default MainNavbar

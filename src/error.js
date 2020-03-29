@@ -5,7 +5,7 @@ class ErrorBoundary extends PureComponent {
     state = { hasError: false }
 
     static getDeriveStateFromError (error) {
-        console.log('error getDerivedStateFromError'. error.message)
+        console.log('error getDerivedStateFromError'.error.message)
         return { hasError: true }
     }
 
