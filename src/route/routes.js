@@ -3,7 +3,7 @@ import { BrowserRouter, Route, Switch, Redirect } from 'react-router-dom'
 
 import { isAuthenticated } from 'services/auth'
 import Profile from 'pages/Profile'
-import List from 'pages/List'
+import List from 'pages/PrivateList'
 import Login from 'pages/Login'
 
 /* eslint-disable */
@@ -23,6 +23,7 @@ const Routes = () => (
             <Route exact path='/' component={Login} />
             <PrivateRoute path='/profile' component={Profile} />
             <PrivateRoute path='/lista' component={List} />
+            <PrivateRoute path='/new' component={Profile} />
             <Route path='*' component={() => <h1>Page not found</h1>} />
         </Switch>
     </BrowserRouter>

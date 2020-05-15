@@ -1,15 +1,16 @@
 import React, { useEffect } from 'react'
 import { Container, Grid, Button, Typography }  from '@material-ui/core'
 import { Card, CardActions, CardContent, CardMedia } from '@material-ui/core'
-import { makeStyles } from '@material-ui/core/styles'
 import { useHistory } from "react-router-dom"
-
-import MainNavbar from '../Navbar/Main'
-import caderno3 from '../../images/caderno3.jpg'
+import { useStyles } from './styles'
 
 import api from 'services/api'
 
+import MainNavbar from '../Navbar/Main'
 import UserDetails from '../../utils/userDetails'
+
+//import caderno3 from '../../images/caderno3.jpg'
+import logo from '../../images/logo1.png'
 
 function Profile () {
     const classes = useStyles()
@@ -44,27 +45,37 @@ function Profile () {
     return (
         <div className={classes.heroContent}>
             <MainNavbar />
+
+            <Grid container spacing={6}>
+                <Typography className={classes.welcome} variant="h6">Bem Vindo, {userName}</Typography>
+                <Button className={classes.newListButton} onClick={() => history.push({
+                    pathname: '/new'
+                })}>
+                    Nova Lista
+                </Button>
+            </Grid>   
+
             <Container className={classes.cardGrid} maxWidth="md">          
-                <Grid container spacing={4}>
+                <Grid container spacing={6}>
                     {data.map(card => (
                     <Grid item key={card} xs={12} sm={6} md={4}>
                         <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
-                                image={caderno3}
+                                image={logo}
                                 title="Imagem padrao"
                             />
                             <CardContent className={classes.cardContent}>
-                                <Typography gutterBottom variant="h5" component="h2">
+                                <Typography className={classes.cardTitle} variant="h5" gutterBottom>
                                     {card.nome}
                                 </Typography>
-                                {/*card.publica === true ? 
-                                    <Typography variant="h7">Compartilhada</Typography>: 
-                                    <Typography variant="h7">Particular</Typography> 
-                                */}                                
+                                {card.publica === true ? 
+                                    <Typography className={classes.cardSubTitle}>Compartilhada</Typography>: 
+                                    <Typography className={classes.cardSubTitle}>Particular</Typography> 
+                                }                              
                             </CardContent>
                             <CardActions>                            
-                                <Button size="small" color="primary"
+                                <Button size="small" className={classes.openButton}
                                     onClick={() => history.push({
                                         pathname: '/lista',
                                         state: { idL: (card.id), nome: (card.nome), publica: (card.publica) }
@@ -80,30 +91,5 @@ function Profile () {
         </div>
     )
 }
-
-const useStyles = makeStyles(theme => ({   
-    heroContent: {
-        backgroundColor: theme.palette.background.paper
-    }, 
-    cardGrid: {
-      paddingTop: theme.spacing(8),
-      paddingBottom: theme.spacing(8),
-    },
-    card: {
-      height: '100%',
-      display: 'flex',
-      flexDirection: 'column',
-    },
-    cardMedia: {
-      paddingTop: '56.25%', // 16:9
-    },
-    cardContent: {
-      flexGrow: 1,
-    },
-    newButton: {
-        backgroundcolor: '#3d94f6',
-	    color: '#ffffff'
-    }
-  }));
 
 export default Profile

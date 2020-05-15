@@ -1,16 +1,14 @@
 import React, { useState } from 'react'
 import AppBar from '@material-ui/core/AppBar'
 import Toolbar from '@material-ui/core/Toolbar'
-import Typography from '@material-ui/core/Typography'
-import { makeStyles } from '@material-ui/core/styles'
-import NotesRoundedIcon from '@material-ui/icons/NotesRounded'
+import { Typography, Button, IconButton } from '@material-ui/core'
+import HomeIcon from '@material-ui/icons/Home'
 import AccountCircle from '@material-ui/icons/AccountCircle'
-import IconButton from '@material-ui/core/IconButton'
 
 import { useHistory } from "react-router-dom"
-import Menu from '@material-ui/core/Menu'
-import MenuItem from '@material-ui/core/MenuItem'
-import styled from 'styled-components'
+import { Menu, MenuItem } from '@material-ui/core'
+
+import { useStyles } from './mainStyles'
 
 function MainNavbar () {
     const classes = useStyles()
@@ -28,10 +26,10 @@ function MainNavbar () {
 
     return (
         <div className={classes.root}>
-            <AppBar position="relative">
+            <AppBar className={classes.navbar}>
                 <Toolbar>
                     <IconButton className={classes.icon} onClick={() => history.push('/profile')}>
-                        <NotesRoundedIcon />
+                        <HomeIcon />
                     </IconButton>
                     <Typography className={classes.title} variant="h6" color="inherit" align="center" noWrap>
                         To Do Lists
@@ -44,12 +42,12 @@ function MainNavbar () {
                         onClose={handleCloseMenu}
                         anchorEl={anchorElement}>
                         <MenuItem>
-                            <h5 className="userText">Bem vindo {userName}</h5>
+                            <h5 className={classes.userText}>{userName}</h5>
                         </MenuItem>
                         <MenuItem>
-                            <ButtonSair className="button" onClick={handleClick}>
+                            <Button className={classes.button} onClick={handleClick}>
                                 Sair
-                            </ButtonSair>
+                            </Button>
                         </MenuItem>
                     </Menu>
                 </Toolbar>
@@ -57,40 +55,5 @@ function MainNavbar () {
         </div>
         )
 }
-
-/* Css */
-const useStyles = makeStyles(theme => ({
-    icon: {
-        marginRight: theme.spacing(2),
-        color: "inherit"
-    },
-    iconAcc: {
-        marginRight: theme.spacing(2),
-        marginLeft: "93%",
-        position: "Absolute",
-        color: "inherit"
-      },
-    title: {
-        marginLeft: "45%",
-        position: "Absolute"
-    },
-    root: {
-        flexGrow: 1,
-        width: '100%',
-        backgroundColor: theme.palette.background.paper
-    },
-    button: {
-
-    },
-    userText: {
-
-    }
-  }))
-
-  /* Const */
-  const ButtonSair = styled.button`
-  border: 0
-  background: transparent
-`
 
 export default MainNavbar
