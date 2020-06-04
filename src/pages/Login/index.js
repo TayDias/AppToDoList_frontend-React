@@ -15,6 +15,8 @@ function Login () {
     const [error, setError] = useState(null)
     const { register, handleSubmit } = useForm()
 
+    //setError(localStorage.getItem('registerAlert'))
+
     const onSubmit = async (data) => {
         const { username, password } = data
         try {
@@ -46,18 +48,18 @@ function Login () {
                 <input className={classes.credentials}
                     name='username'
                     type='text'
-                    placeholder='Username'
+                    placeholder='Usuario'
                     ref={register}
                 />
                 <input className={classes.credentials}
                     name='password'
                     type='password'
-                    placeholder='Password'
+                    placeholder='Senha'
                     ref={register}
                 />
                 <button className={classes.loginButton} type="submit">Entrar</button>
                 <hr />
-                <Link className={classes.newAccount} to="/signup">Criar conta</Link>
+                <Link className={classes.newAccount} to="/new">Criar conta</Link>
                 
             </form>
         </Container>

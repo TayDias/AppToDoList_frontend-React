@@ -5,6 +5,7 @@ import { isAuthenticated } from 'services/auth'
 import Profile from 'pages/Profile'
 import List from 'pages/PrivateList'
 import Login from 'pages/Login'
+import Register from 'pages/Register'
 
 /* eslint-disable */
 const PrivateRoute = ({ component: Component, ...rest }) => (
@@ -23,7 +24,7 @@ const Routes = () => (
             <Route exact path='/' component={Login} />
             <PrivateRoute path='/profile' component={Profile} />
             <PrivateRoute path='/lista' component={List} />
-            <PrivateRoute path='/new' component={Profile} />
+            <PrivateRoute path='/new' component={Register} />
             <Route path='*' component={() => <h1>Page not found</h1>} />
         </Switch>
     </BrowserRouter>

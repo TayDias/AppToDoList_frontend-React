@@ -49,7 +49,7 @@ function Profile () {
             <Grid container spacing={6}>
                 <Typography className={classes.welcome} variant="h6">Bem Vindo, {userName}</Typography>
                 <Button className={classes.newListButton} onClick={() => history.push({
-                    pathname: '/new'
+                    pathname: '/newList'
                 })}>
                     Nova Lista
                 </Button>
