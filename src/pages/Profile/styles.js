@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core/styles'
 
 export const useStyles = makeStyles(theme => ({   
-    heroContent: {
+    content: {
       fontFamily: "roboto",
       fontStyle: "normal",
       fontWeight: "normal",
@@ -9,17 +9,19 @@ export const useStyles = makeStyles(theme => ({
     }, 
 
     welcome: {
+      display: "flex",
       position: "relative",
       width: "30%",
-      marginTop: "3.6em",
-      marginLeft: "11.2em",
       fontSize: "20px",
-      display: "flex",
       color: "#858585",
-      alignItems: "center"
+      alignItems: "center",
+
+      marginTop: "3.6em",
+      marginLeft: "17%",
     },
 
     newListButton: {
+      display: "flex",
       backgroundcolor: '#ADACAC',
       color: '#ffffff',
       fontSize: "16px",
@@ -31,10 +33,10 @@ export const useStyles = makeStyles(theme => ({
       border: "none", 
       background: "linear-gradient(0deg, #ADACAC, #ADACAC), #F2F1F1",
       borderRadius: "5px",
-      display: "flex",
 
       marginTop: "4.8em",
-      marginLeft: "15.6em"
+      marginLeft: "18%",
+      marginRigth: "25%"
     },
 
     cardGrid: {
@@ -44,11 +46,12 @@ export const useStyles = makeStyles(theme => ({
     },
 
     card: {
-      height: '100%',
-      width: '100%',
       display: 'flex',
       flexDirection: 'column',
+      height: '100%',
+      width: '100%',
       maxWidth: "360px",
+
       //marginLeft: '0.8em'
     },
 

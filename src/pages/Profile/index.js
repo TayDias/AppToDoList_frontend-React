@@ -9,7 +9,7 @@ import api from 'services/api'
 import MainNavbar from '../Navbar/Main'
 import UserDetails from '../../utils/userDetails'
 
-//import caderno3 from '../../images/caderno3.jpg'
+//Trocar imagem
 import logo from '../../images/logo1.png'
 
 function Profile () {
@@ -20,6 +20,7 @@ function Profile () {
     const usuario = UserDetails(userName)
 
     localStorage.setItem('name', usuario.nome)
+    localStorage.setItem('idUsuario', usuario.id)
 
     // Array [ valor, funçãoDeAtualização]
     const [data, setData] = React.useState([])
@@ -27,11 +28,14 @@ function Profile () {
     useEffect(() => {
         async function retornaListas () {
             try {
-                const result = await api.get('/lista', { 
-                    params: { 
-                        idUser: usuario.id 
-                    } 
-                }, api.config)
+                const result = await api.get(
+                    '/lista', 
+                    { params: { 
+                                idUser: usuario.id 
+                            } 
+                    }, 
+                    api.config
+                )
 
                 setData(result.data)
             } catch (err) {
@@ -43,11 +47,14 @@ function Profile () {
     }, [usuario])
 
     return (
-        <div className={classes.heroContent}>
+        <div className={classes.content}>
             <MainNavbar />
 
-            <Grid container spacing={6}>
-                <Typography className={classes.welcome} variant="h6">Bem Vindo, {userName}</Typography>
+            <Grid container spacing={6}>      
+                <Typography className={classes.welcome} variant="h6">
+                    Bem Vindo {usuario.nome}
+                </Typography>
+
                 <Button className={classes.newListButton} onClick={() => history.push({
                     pathname: '/newList'
                 })}>
@@ -58,7 +65,7 @@ function Profile () {
             <Container className={classes.cardGrid} maxWidth="md">          
                 <Grid container spacing={6}>
                     {data.map(card => (
-                    <Grid item key={card} xs={12} sm={6} md={4}>
+                    <Grid item key={card.id} xs={12} sm={6} md={4}>
                         <Card className={classes.card}>
                             <CardMedia
                                 className={classes.cardMedia}
@@ -78,7 +85,11 @@ function Profile () {
                                 <Button size="small" className={classes.openButton}
                                     onClick={() => history.push({
                                         pathname: '/lista',
-                                        state: { idL: (card.id), nome: (card.nome), publica: (card.publica) }
+                                        state: { 
+                                            idL: (card.id), 
+                                            nome: (card.nome), 
+                                            publica: (card.publica) 
+                                        }
                                       })}>
                                     Abrir
                                 </Button>
